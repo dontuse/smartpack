@@ -522,7 +522,7 @@ textarea {
 body,
 html {
   height: 100%;
-  background: #fafafa;
+  background: #ffffff;
 }
 html {
   *overflow-x: hidden;
@@ -672,14 +672,37 @@ textarea {
 .b-box_2 {
   margin-bottom: 20px;
 }
+.b-box-1 {
+  background: url("../blocks//i-img/bg1.png") no-repeat bottom center;
+}
+.b-box-2 {
+  height: 300px;
+  background: url("../blocks//i-img/bg2.png") repeat-y top center;
+}
+.b-box-3 {
+  background: url("../blocks//i-img/bg3.png") no-repeat top center;
+  height: 641px;
+}
+.b-box-4 {
+  background: url("../blocks//i-img/bg4.png") no-repeat top center;
+}
+.b-box-5 {
+  background: url("../blocks//i-img/bg5.png") repeat-y top center;
+}
+.b-box-6 {
+  background: url("../blocks//i-img/bg6.png") no-repeat bottom center;
+  height: 800px;
+}
+.b-box-7 {
+  background: #aa1e2c;
+}
 /*---| .b-wrapper |----------------------start----------------------------------------*/
 .b-wrapper {
-  width: 900px;
+  width: 940px;
   margin: 0 auto;
 }
 /*===| .b-wrapper |======================end==========================================*//*---| .b-footer |----------------------start----------------------------------------*/
 .b-footer {
-  background: #0066bb;
   height: 200px;
 }
 /*===| .b-footer |======================end==========================================*//*---| .b-page |----------------------start----------------------------------------*/
@@ -692,6 +715,7 @@ textarea {
 /*===| .b-page |======================end==========================================*//*---| .b-header |----------------------start----------------------------------------*/
 .b-header {
   min-height: 100px;
+  height: 147px;
 }
 /*===| .b-header |======================end==========================================*//*---| .b-content |----------------------start----------------------------------------*/
 .b-content {
@@ -728,7 +752,11 @@ textarea {
   text-decoration: none;
   background: url("../blocks//i-img/b-logo.png") no-repeat;
 }
-/*===| .b-logo |======================end==========================================*//*---| .b-button |----------------------start----------------------------------------*/
+/*===| .b-logo |======================end==========================================*/
+.b-logo_gray {
+  background: url("../blocks//i-img/footer-logo.png") no-repeat;
+}
+/*---| .b-button |----------------------start----------------------------------------*/
 .b-button {
   margin: 0;
   padding: 0;
@@ -834,7 +862,7 @@ textarea {
 .b-slog {
   width: 452px;
   margin-left: 309px;
-  top: 100px;
+  top: 360px;
   position: relative;
 }
 .b-slog__wrapper {
@@ -867,4 +895,87 @@ textarea {
   left: -67px;
   background: url("../blocks//i-img/b-slog.png") no-repeat;
 }
-/*===| .b-slog |======================end==========================================*/
+/*===| .b-slog |======================end==========================================*//*---| .b-title. |----------------------start----------------------------------------*/
+.b-title {
+  font-size: 38px;
+  line-height: 1;
+  color: #ffffff;
+  margin-bottom: 41px;
+  text-transform: uppercase;
+  font-family: FuturisXC;
+}
+.b-title__im {
+  color: #c82031;
+  font-style: normal;
+}
+/*===| .b-title. |======================end==========================================*//*---| .b-contact-form |----------------------start----------------------------------------*/
+.b-contact-form__inp {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-family: Arial;
+  color: #1f1f1f;
+  height: 60px;
+  line-height: 60px;
+  background: #ffffff;
+  display: block;
+  width: 284px;
+  padding-left: 21px;
+}
+.b-contact-form__box {
+  float: left;
+  margin-right: 12px;
+  margin-bottom: 30px;
+}
+.b-contact-form__lab {
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 5px;
+  display: block;
+  font-family: FuturisXC;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.b-contact-form__textarea {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-size: Arial;
+  display: block;
+  background: #ffffff;
+  padding-left: 21px;
+  width: 920px;
+  height: 112px;
+  padding-top: 16px;
+}
+.b-contact-form__btn {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  text-transform: uppercase;
+  background: #c82031;
+  height: 66px;
+  line-height: 73px;
+  width: 322px;
+  color: #ffffff;
+  font-family: FuturisXC;
+}
+/*===| .b-contact-form |======================end==========================================*//*---| .b-contacts |----------------------start----------------------------------------*/
+.b-contacts__phones {
+  font-size: 15px;
+  line-height: 22px;
+  font-family: FuturisXC;
+  color: #1a2c5e;
+}
+.b-contacts__addr {
+  font-size: 13px;
+  line-height: 19px;
+  width: 273px;
+}
+/*===| .b-contacts |======================end==========================================*/

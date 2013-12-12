@@ -3,7 +3,7 @@
 
     "../js/lib/jquery-1.8.2.min.js",
 
-
+    "../blocks/bootstrap/js/scrollspy.js",
     "../js/lib/jcarousel/core.js",
     "../js/lib/jcarousel/core_plugin.js",
     "../js/lib/jcarousel/scrollintoview.js",
