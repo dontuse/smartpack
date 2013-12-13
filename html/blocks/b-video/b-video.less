@@ -1,0 +1,50 @@
+/*---| .b-video |----------------------start----------------------------------------*/
+
+.b-video {
+  .clearFix();
+
+}
+
+.b-video__img {
+  float: left;
+  overflow: hidden;
+  width: 79px;
+  height: 58px;
+}
+
+.b-video__img img {
+  max-width: 100%;
+}
+
+.b-video__img:after {
+  background: url("@{blockPath}/i-img/video-play.png") no-repeat center center red;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+
+
+.b-video__txt {
+  overflow: hidden;
+  padding-left: 19px;
+  line-height: 59px;
+}
+
+.b-video__a,
+.b-video__a:visited {
+  border-bottom: 1px dashed;
+  color: #1a2c5e;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+  font-family: @dFont;
+
+}
+
+
+
+
+/*===| .b-video |======================end==========================================*/

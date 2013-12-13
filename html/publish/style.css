@@ -908,7 +908,12 @@ textarea {
   color: #c82031;
   font-style: normal;
 }
-/*===| .b-title. |======================end==========================================*//*---| .b-contact-form |----------------------start----------------------------------------*/
+/*===| .b-title. |======================end==========================================*/
+/*---| .b-title_type_2 |----------------------start----------------------------------------*/
+.b-title_type_2 {
+  color: #000000;
+}
+/*===| .b-title_type_2 |======================end==========================================*//*---| .b-contact-form |----------------------start----------------------------------------*/
 .b-contact-form__inp {
   margin: 0;
   padding: 0;
@@ -978,4 +983,96 @@ textarea {
   line-height: 19px;
   width: 273px;
 }
-/*===| .b-contacts |======================end==========================================*/
+/*===| .b-contacts |======================end==========================================*//*---| .b-video |----------------------start----------------------------------------*/
+.b-video {
+  *zoom: 1;
+}
+.b-video:before,
+.b-video:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.b-video:after {
+  clear: both;
+}
+.b-video__img {
+  float: left;
+  overflow: hidden;
+  width: 79px;
+  height: 58px;
+}
+.b-video__img img {
+  max-width: 100%;
+}
+.b-video__img:after {
+  background: url("../blocks//i-img/video-play.png") no-repeat center center #ff0000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+.b-video__txt {
+  overflow: hidden;
+  padding-left: 19px;
+  line-height: 59px;
+}
+.b-video__a,
+.b-video__a:visited {
+  border-bottom: 1px dashed;
+  color: #1a2c5e;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+  font-family: FuturisXC;
+}
+/*===| .b-video |======================end==========================================*//*---| .b-tab-nav |----------------------start----------------------------------------*/
+.b-tab-nav__a,
+.b-tab-nav__a:visited {
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 1px dashed;
+  color: #ffffff;
+}
+.b-tab-nav__menu-box {
+  padding: 20px;
+  color: #000000;
+  font-family: FuturisXC;
+}
+.b-tab-nav__menu-box_active {
+  background: #ffffff;
+}
+.b-tab-nav__menu-box_active .b-tab-nav__a,
+.b-tab-nav__menu-box_active .b-tab-nav__a:visited {
+  color: #000000;
+  border-bottom: none;
+}
+.b-tab-nav__content {
+  color: #000000;
+}
+/*===| .b-tab-nav |======================end==========================================*//*---| .b-call-us |----------------------start----------------------------------------*/
+.b-call-us {
+  *zoom: 1;
+}
+.b-call-us:before,
+.b-call-us:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.b-call-us:after {
+  clear: both;
+}
+.b-call-us__img {
+  background: url("../blocks//i-img/b-call-us__img.png");
+  width: 41px;
+  height: 30px;
+  float: left;
+  margin-right: 19px;
+}
+.b-video__a,
+.b-video__a:visited {
+  color: #ad2c38;
+}
+/*===| .b-call-us |======================end==========================================*/
