@@ -1397,165 +1397,350 @@
     });
 }(jQuery));
 
-/* ========================================================================
- * Bootstrap: scrollspy.js v3.0.3
- * http://getbootstrap.com/javascript/#scrollspy
- * ========================================================================
- * Copyright 2013 Twitter, Inc.
+/**
+ * @license 
+ * jQuery Tools @VERSION Tabs- The basics of UI design.
+ * 
+ * NO COPYRIGHTS OR LICENSES. DO WHAT YOU LIKE.
+ * 
+ * http://flowplayer.org/tools/tabs/
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Since: November 2008
+ * Date: @DATE 
+ */  
+(function($) {
+		
+	// static constructs
+	$.tools = $.tools || {version: '@VERSION'};
+	
+	$.tools.tabs = {
+		
+		conf: {
+			tabs: 'a',
+			current: 'current',
+			onBeforeClick: null,
+			onClick: null, 
+			effect: 'default',
+			initialEffect: false,   // whether or not to show effect in first init of tabs
+			initialIndex: 0,			
+			event: 'click',
+			rotate: false,
+			
+      // slide effect
+      slideUpSpeed: 400,
+      slideDownSpeed: 400,
+			
+			// 1.2
+			history: false
+		},
+		
+		addEffect: function(name, fn) {
+			effects[name] = fn;
+		}
+		
+	};
+	
+	var effects = {
+		
+		// simple "toggle" effect
+		'default': function(i, done) { 
+			this.getPanes().hide().eq(i).show();
+			done.call();
+		}, 
+		
+		/*
+			configuration:
+				- fadeOutSpeed (positive value does "crossfading")
+				- fadeInSpeed
+		*/
+		fade: function(i, done) {		
+			
+			var conf = this.getConf(),
+				 speed = conf.fadeOutSpeed,
+				 panes = this.getPanes();
+			
+			if (speed) {
+				panes.fadeOut(speed);	
+			} else {
+				panes.hide();	
+			}
+
+			panes.eq(i).fadeIn(conf.fadeInSpeed, done);	
+		},
+		
+		// for basic accordions
+		slide: function(i, done) {
+		  var conf = this.getConf();
+		  
+			this.getPanes().slideUp(conf.slideUpSpeed);
+			this.getPanes().eq(i).slideDown(conf.slideDownSpeed, done);			 
+		}, 
+
+		/**
+		 * AJAX effect
+		 */
+		ajax: function(i, done)  {			
+			this.getPanes().eq(0).load(this.getTabs().eq(i).attr("href"), done);	
+		}		
+	};   	
+	
+	/**
+	 * Horizontal accordion
+	 * 
+	 * @deprecated will be replaced with a more robust implementation
+	*/
+	
+	var
+	  /**
+	  *   @type {Boolean}
+	  *
+	  *   Mutex to control horizontal animation
+	  *   Disables clicking of tabs while animating
+	  *   They mess up otherwise as currentPane gets set *after* animation is done
+	  */
+	  animating,
+	  /**
+	  *   @type {Number}
+	  *   
+	  *   Initial width of tab panes
+	  */
+	  w;
+	 
+	$.tools.tabs.addEffect("horizontal", function(i, done) {
+	  if (animating) return;    // don't allow other animations
+	  
+	  var nextPane = this.getPanes().eq(i),
+	      currentPane = this.getCurrentPane();
+	      
+		// store original width of a pane into memory
+		w || ( w = this.getPanes().eq(0).width() );
+		animating = true;
+		
+		nextPane.show(); // hidden by default
+		
+		// animate current pane's width to zero
+    // animate next pane's width at the same time for smooth animation
+    currentPane.animate({width: 0}, {
+      step: function(now){
+        nextPane.css("width", w-now);
+      },
+      complete: function(){
+        $(this).hide();
+        done.call();
+        animating = false;
+     }
+    });
+    // Dirty hack...  onLoad, currentPant will be empty and nextPane will be the first pane
+    // If this is the case, manually run callback since the animation never occured, and reset animating
+    if (!currentPane.length){ 
+      done.call(); 
+      animating = false;
+    }
+	});	
+
+	
+	function Tabs(root, paneSelector, conf) {
+		
+		var self = this,
+        trigger = root.add(this),
+        tabs = root.find(conf.tabs),
+        panes = paneSelector.jquery ? paneSelector : root.children(paneSelector),
+        current;
+			 
+		
+		// make sure tabs and panes are found
+		if (!tabs.length)  { tabs = root.children(); }
+		if (!panes.length) { panes = root.parent().find(paneSelector); }
+		if (!panes.length) { panes = $(paneSelector); }
+		
+		
+		// public methods
+		$.extend(this, {				
+			click: function(i, e) {
+			  
+				var tab = tabs.eq(i),
+				    firstRender = !root.data('tabs');
+				
+				if (typeof i == 'string' && i.replace("#", "")) {
+					tab = tabs.filter("[href*=\"" + i.replace("#", "") + "\"]");
+					i = Math.max(tabs.index(tab), 0);
+				}
+								
+				if (conf.rotate) {
+					var last = tabs.length -1; 
+					if (i < 0) { return self.click(last, e); }
+					if (i > last) { return self.click(0, e); }						
+				}
+				
+				if (!tab.length) {
+					if (current >= 0) { return self; }
+					i = conf.initialIndex;
+					tab = tabs.eq(i);
+				}				
+				
+				// current tab is being clicked
+				if (i === current) { return self; }
+				
+				// possibility to cancel click action				
+				e = e || $.Event();
+				e.type = "onBeforeClick";
+				trigger.trigger(e, [i]);				
+				if (e.isDefaultPrevented()) { return; }
+				
+        // if firstRender, only run effect if initialEffect is set, otherwise default
+				var effect = firstRender ? conf.initialEffect && conf.effect || 'default' : conf.effect;
+
+				// call the effect
+				effects[effect].call(self, i, function() {
+					current = i;
+					// onClick callback
+					e.type = "onClick";
+					trigger.trigger(e, [i]);
+				});			
+				
+				// default behaviour
+				tabs.removeClass(conf.current);	
+				tab.addClass(conf.current);				
+				
+				return self;
+			},
+			
+			getConf: function() {
+				return conf;	
+			},
+
+			getTabs: function() {
+				return tabs;	
+			},
+			
+			getPanes: function() {
+				return panes;	
+			},
+			
+			getCurrentPane: function() {
+				return panes.eq(current);	
+			},
+			
+			getCurrentTab: function() {
+				return tabs.eq(current);	
+			},
+			
+			getIndex: function() {
+				return current;	
+			}, 
+			
+			next: function() {
+				return self.click(current + 1);
+			},
+			
+			prev: function() {
+				return self.click(current - 1);	
+			},
+			
+			destroy: function() {
+				tabs.off(conf.event).removeClass(conf.current);
+				panes.find("a[href^=\"#\"]").off("click.T"); 
+				return self;
+			}
+		
+		});
+
+		// callbacks	
+		$.each("onBeforeClick,onClick".split(","), function(i, name) {
+				
+			// configuration
+			if ($.isFunction(conf[name])) {
+				$(self).on(name, conf[name]); 
+			}
+
+			// API
+			self[name] = function(fn) {
+				if (fn) { $(self).on(name, fn); }
+				return self;	
+			};
+		});
+	
+		
+		if (conf.history && $.fn.history) {
+			$.tools.history.init(tabs);
+			conf.event = 'history';
+		}	
+		
+		// setup click actions for each tab
+		tabs.each(function(i) { 				
+			$(this).on(conf.event, function(e) {
+				self.click(i, e);
+				return e.preventDefault();
+			});			
+		});
+		
+		// cross tab anchor link
+		panes.find("a[href^=\"#\"]").on("click.T", function(e) {
+			self.click($(this).attr("href"), e);		
+		}); 
+		
+		// open initial tab
+		if (location.hash && conf.tabs == "a" && root.find("[href=\"" +location.hash+ "\"]").length) {
+			self.click(location.hash);
+
+		} else {
+			if (conf.initialIndex === 0 || conf.initialIndex > 0) {
+				self.click(conf.initialIndex);
+			}
+		}				
+		
+	}
+	
+	
+	// jQuery plugin implementation
+	$.fn.tabs = function(paneSelector, conf) {
+		
+		// return existing instance
+		var el = this.data("tabs");
+		if (el) { 
+			el.destroy();	
+			this.removeData("tabs");
+		}
+
+		if ($.isFunction(conf)) {
+			conf = {onBeforeClick: conf};
+		}
+		
+		// setup conf
+		conf = $.extend({}, $.tools.tabs.conf, conf);		
+		
+		
+		this.each(function() {				
+			el = new Tabs($(this), paneSelector, conf);
+			$(this).data("tabs", el); 
+		});		
+		
+		return conf.api ? el: this;		
+	};		
+		
+}) (jQuery); 
+
+
+
+/*
+jQuery Waypoints - v1.1.4
+Copyright (c) 2011-2012 Caleb Troughton
+Dual licensed under the MIT license and GPL license.
+https://github.com/imakewebthings/jquery-waypoints/blob/master/MIT-license.txt
+https://github.com/imakewebthings/jquery-waypoints/blob/master/GPL-license.txt
+*/
+(function($,k,m,i,d){var e=$(i),g="waypoint.reached",b=function(o,n){o.element.trigger(g,n);if(o.options.triggerOnce){o.element[k]("destroy")}},h=function(p,o){var n=o.waypoints.length-1;while(n>=0&&o.waypoints[n].element[0]!==p[0]){n-=1}return n},f=[],l=function(n){$.extend(this,{element:$(n),oldScroll:0,waypoints:[],didScroll:false,didResize:false,doScroll:$.proxy(function(){var q=this.element.scrollTop(),p=q>this.oldScroll,s=this,r=$.grep(this.waypoints,function(u,t){return p?(u.offset>s.oldScroll&&u.offset<=q):(u.offset<=s.oldScroll&&u.offset>q)}),o=r.length;if(!this.oldScroll||!q){$[m]("refresh")}this.oldScroll=q;if(!o){return}if(!p){r.reverse()}$.each(r,function(u,t){if(t.options.continuous||u===o-1){b(t,[p?"down":"up"])}})},this)});$(n).scroll($.proxy(function(){if(!this.didScroll){this.didScroll=true;i.setTimeout($.proxy(function(){this.doScroll();this.didScroll=false},this),$[m].settings.scrollThrottle)}},this)).resize($.proxy(function(){if(!this.didResize){this.didResize=true;i.setTimeout($.proxy(function(){$[m]("refresh");this.didResize=false},this),$[m].settings.resizeThrottle)}},this));e.load($.proxy(function(){this.doScroll()},this))},j=function(n){var o=null;$.each(f,function(p,q){if(q.element[0]===n){o=q;return false}});return o},c={init:function(o,n){this.each(function(){var u=$.fn[k].defaults.context,q,t=$(this);if(n&&n.context){u=n.context}if(!$.isWindow(u)){u=t.closest(u)[0]}q=j(u);if(!q){q=new l(u);f.push(q)}var p=h(t,q),s=p<0?$.fn[k].defaults:q.waypoints[p].options,r=$.extend({},s,n);r.offset=r.offset==="bottom-in-view"?function(){var v=$.isWindow(u)?$[m]("viewportHeight"):$(u).height();return v-$(this).outerHeight()}:r.offset;if(p<0){q.waypoints.push({element:t,offset:null,options:r})}else{q.waypoints[p].options=r}if(o){t.bind(g,o)}if(n&&n.handler){t.bind(g,n.handler)}});$[m]("refresh");return this},remove:function(){return this.each(function(o,p){var n=$(p);$.each(f,function(r,s){var q=h(n,s);if(q>=0){s.waypoints.splice(q,1)}})})},destroy:function(){return this.unbind(g)[k]("remove")}},a={refresh:function(){$.each(f,function(r,s){var q=$.isWindow(s.element[0]),n=q?0:s.element.offset().top,p=q?$[m]("viewportHeight"):s.element.height(),o=q?0:s.element.scrollTop();$.each(s.waypoints,function(u,x){if(!x){return}var t=x.options.offset,w=x.offset;if(typeof x.options.offset==="function"){t=x.options.offset.apply(x.element)}else{if(typeof x.options.offset==="string"){var v=parseFloat(x.options.offset);t=x.options.offset.indexOf("%")?Math.ceil(p*(v/100)):v}}x.offset=x.element.offset().top-n+o-t;if(x.options.onlyOnScroll){return}if(w!==null&&s.oldScroll>w&&s.oldScroll<=x.offset){b(x,["up"])}else{if(w!==null&&s.oldScroll<w&&s.oldScroll>=x.offset){b(x,["down"])}else{if(!w&&o>x.offset){b(x,["down"])}}}});s.waypoints.sort(function(u,t){return u.offset-t.offset})})},viewportHeight:function(){return(i.innerHeight?i.innerHeight:e.height())},aggregate:function(){var n=$();$.each(f,function(o,p){$.each(p.waypoints,function(q,r){n=n.add(r.element)})});return n}};$.fn[k]=function(n){if(c[n]){return c[n].apply(this,Array.prototype.slice.call(arguments,1))}else{if(typeof n==="function"||!n){return c.init.apply(this,arguments)}else{if(typeof n==="object"){return c.init.apply(this,[null,n])}else{$.error("Method "+n+" does not exist on jQuery "+k)}}}};$.fn[k].defaults={continuous:true,offset:0,triggerOnce:false,context:i};$[m]=function(n){if(a[n]){return a[n].apply(this)}else{return a.aggregate()}};$[m].settings={resizeThrottle:200,scrollThrottle:100};e.load(function(){$[m]("refresh")})})(jQuery,"waypoint","waypoints",this);
+/**
+ * jQuery.ScrollTo - Easy element scrolling using jQuery.
+ * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
+ * Dual licensed under MIT and GPL.
+ * Date: 5/25/2009
+ * @author Ariel Flesler
+ * @version 1.4.2
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ======================================================================== */
-
-
-+function ($) { "use strict";
-
-  // SCROLLSPY CLASS DEFINITION
-  // ==========================
-
-  function ScrollSpy(element, options) {
-    var href
-    var process  = $.proxy(this.process, this)
-
-    this.$element       = $(element).is('body') ? $(window) : $(element)
-    this.$body          = $('body')
-    this.$scrollElement = this.$element.on('scroll.bs.scroll-spy.data-api', process)
-    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-    this.selector       = (this.options.target
-      || ((href = $(element).attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
-      || '') + ' .nav li > a'
-    this.offsets        = $([])
-    this.targets        = $([])
-    this.activeTarget   = null
-
-    this.refresh()
-    this.process()
-  }
-
-  ScrollSpy.DEFAULTS = {
-    offset: 10
-  }
-
-  ScrollSpy.prototype.refresh = function () {
-    var offsetMethod = this.$element[0] == window ? 'offset' : 'position'
-
-    this.offsets = $([])
-    this.targets = $([])
-
-    var self     = this
-    var $targets = this.$body
-      .find(this.selector)
-      .map(function () {
-        var $el   = $(this)
-        var href  = $el.data('target') || $el.attr('href')
-        var $href = /^#\w/.test(href) && $(href)
-
-        return ($href
-          && $href.length
-          && [[ $href[offsetMethod]().top + (!$.isWindow(self.$scrollElement.get(0)) && self.$scrollElement.scrollTop()), href ]]) || null
-      })
-      .sort(function (a, b) { return a[0] - b[0] })
-      .each(function () {
-        self.offsets.push(this[0])
-        self.targets.push(this[1])
-      })
-  }
-
-  ScrollSpy.prototype.process = function () {
-    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-    var scrollHeight = this.$scrollElement[0].scrollHeight || this.$body[0].scrollHeight
-    var maxScroll    = scrollHeight - this.$scrollElement.height()
-    var offsets      = this.offsets
-    var targets      = this.targets
-    var activeTarget = this.activeTarget
-    var i
-
-    if (scrollTop >= maxScroll) {
-      return activeTarget != (i = targets.last()[0]) && this.activate(i)
-    }
-
-    for (i = offsets.length; i--;) {
-      activeTarget != targets[i]
-        && scrollTop >= offsets[i]
-        && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-        && this.activate( targets[i] )
-    }
-  }
-
-  ScrollSpy.prototype.activate = function (target) {
-    this.activeTarget = target
-
-    $(this.selector)
-      .parents('.active')
-      .removeClass('active')
-
-    var selector = this.selector
-      + '[data-target="' + target + '"],'
-      + this.selector + '[href="' + target + '"]'
-
-    var active = $(selector)
-      .parents('li')
-      .addClass('active')
-
-    if (active.parent('.dropdown-menu').length)  {
-      active = active
-        .closest('li.dropdown')
-        .addClass('active')
-    }
-
-    active.trigger('activate.bs.scrollspy')
-  }
-
-
-  // SCROLLSPY PLUGIN DEFINITION
-  // ===========================
-
-  var old = $.fn.scrollspy
-
-  $.fn.scrollspy = function (option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.scrollspy')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  $.fn.scrollspy.Constructor = ScrollSpy
-
-
-  // SCROLLSPY NO CONFLICT
-  // =====================
-
-  $.fn.scrollspy.noConflict = function () {
-    $.fn.scrollspy = old
-    return this
-  }
-
-
-  // SCROLLSPY DATA-API
-  // ==================
-
-  $(window).on('load', function () {
-    $('[data-spy="scroll"]').each(function () {
-      var $spy = $(this)
-      $spy.scrollspy($spy.data())
-    })
-  })
-
-}(jQuery);
-
+ * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
+ */
+;(function(d){var k=d.scrollTo=function(a,i,e){d(window).scrollTo(a,i,e)};k.defaults={axis:'xy',duration:parseFloat(d.fn.jquery)>=1.3?0:1};k.window=function(a){return d(window)._scrollable()};d.fn._scrollable=function(){return this.map(function(){var a=this,i=!a.nodeName||d.inArray(a.nodeName.toLowerCase(),['iframe','#document','html','body'])!=-1;if(!i)return a;var e=(a.contentWindow||a).document||a.ownerDocument||a;return d.browser.safari||e.compatMode=='BackCompat'?e.body:e.documentElement})};d.fn.scrollTo=function(n,j,b){if(typeof j=='object'){b=j;j=0}if(typeof b=='function')b={onAfter:b};if(n=='max')n=9e9;b=d.extend({},k.defaults,b);j=j||b.speed||b.duration;b.queue=b.queue&&b.axis.length>1;if(b.queue)j/=2;b.offset=p(b.offset);b.over=p(b.over);return this._scrollable().each(function(){var q=this,r=d(q),f=n,s,g={},u=r.is('html,body');switch(typeof f){case'number':case'string':if(/^([+-]=)?\d+(\.\d+)?(px|%)?$/.test(f)){f=p(f);break}f=d(f,this);case'object':if(f.is||f.style)s=(f=d(f)).offset()}d.each(b.axis.split(''),function(a,i){var e=i=='x'?'Left':'Top',h=e.toLowerCase(),c='scroll'+e,l=q[c],m=k.max(q,i);if(s){g[c]=s[h]+(u?0:l-r.offset()[h]);if(b.margin){g[c]-=parseInt(f.css('margin'+e))||0;g[c]-=parseInt(f.css('border'+e+'Width'))||0}g[c]+=b.offset[h]||0;if(b.over[h])g[c]+=f[i=='x'?'width':'height']()*b.over[h]}else{var o=f[h];g[c]=o.slice&&o.slice(-1)=='%'?parseFloat(o)/100*m:o}if(/^\d+$/.test(g[c]))g[c]=g[c]<=0?0:Math.min(g[c],m);if(!a&&b.queue){if(l!=g[c])t(b.onAfterFirst);delete g[c]}});t(b.onAfter);function t(a){r.animate(g,j,b.easing,a&&function(){a.call(this,n,b)})}}).end()};k.max=function(a,i){var e=i=='x'?'Width':'Height',h='scroll'+e;if(!d(a).is('html,body'))return a[h]-d(a)[e.toLowerCase()]();var c='client'+e,l=a.ownerDocument.documentElement,m=a.ownerDocument.body;return Math.max(l[h],m[h])-Math.min(l[c],m[c])};function p(a){return typeof a=='object'?a:{top:a,left:a}}})(jQuery);
 /* map */
 $(function(){
     $block = $('.js-map');
@@ -1574,13 +1759,45 @@ $(function(){
 
 
 });
+
 /*map*/
 
-/* navigation */
-$(function(){
 
+/* tabs */
+$(function(){
+/*    var $block = $('.js-full-reg');
+
+    if ($block.length === 0) {
+        return false;
+    }*/
+
+    $('.b-tab-nav__content').hide();
+
+    $(".b-tab-nav_nav").tabs(".b-tab-nav__content", {
+        // history: true,
+        current: 'b-tab-nav__menu-box_active',
+        tebs :'div.b-tab-nav__menu-box' ,
+        effect: "slide",
+        //slideUpSpeed: 300,
+       // slideDownSpeed: 0,
+        onBeforeClick: function (event, index) {
+            // console.log('before');
+            //   console.log(event);
+            //  console.log(index);
+            // console.log(this.getCurrentTab());
+            // убрать папика
+           // $(this.getCurrentTab()).parents('.b-tab-nav__menu-box').removeClass('b-tab-nav__menu-box_active');
+        },
+        onClick: function (event, index) {
+           // $('.b-tab-nav__menu-box').removeClass('b-tab-nav__menu-box_active');
+
+          //  $(this.getCurrentTab()).parents('.b-tab-nav__menu-box').addClass('b-tab-nav__menu-box_active');
+        }
+    });
 });
-/* navigation */
+/* tabs */
+
+
 
 
 /* carousel */
@@ -1640,3 +1857,69 @@ $(function(){
     });
 })(jQuery);
 /* carousel */
+
+
+
+/* navigation*/
+$(function() {
+
+    // Do our DOM lookups beforehand
+    var nav_container = $("c");
+    var nav = $("nav");
+
+    var top_spacing = 15;
+    var waypoint_offset = 50;
+
+    nav_container.waypoint({
+        handler: function(event, direction) {
+
+            if (direction == 'down') {
+
+                nav_container.css({ 'height':nav.outerHeight() });
+                nav.stop().addClass("sticky").css("top",-nav.outerHeight()).animate({"top":top_spacing});
+
+            } else {
+
+                nav_container.css({ 'height':'auto' });
+                nav.stop().removeClass("sticky").css("top",nav.outerHeight()+waypoint_offset).animate({"top":""});
+
+            }
+
+        },
+        offset: function() {
+            return -nav.outerHeight()-waypoint_offset;
+        }
+    });
+
+    var sections = $("section");
+    var navigation_links = $("nav a");
+
+    sections.waypoint({
+        handler: function(event, direction) {
+
+            var active_section;
+            active_section = $(this);
+            if (direction === "up") active_section = active_section.prev();
+
+            var active_link = $('nav a[href="#' + active_section.attr("id") + '"]');
+            navigation_links.removeClass("selected");
+            active_link.addClass("selected");
+
+        },
+        offset: '25%'
+    })
+
+
+    navigation_links.click( function(event) {
+
+        $.scrollTo(
+            $(this).attr("href"),
+            {
+                duration: 200,
+                offset: { 'left':0, 'top':-0.15*$(window).height() }
+            }
+        );
+    });
+
+
+});

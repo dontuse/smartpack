@@ -2,8 +2,9 @@
     "../js/lib/jquery-1.8.2.min.js",
 
     "../js/lib/jcarousel/jquery.jcarousel.js",
-
-    "../blocks/bootstrap/js/scrollspy.js",
+    "../js/lib/jquerytools/tabs/tabs.js",
+    "../js/lib/waypoints.min.js",
+    "../js/lib/jquery.scrollTo-1.4.2-min.js",
     "../js/all.js"
 
 ]

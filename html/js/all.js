@@ -16,13 +16,45 @@ $(function(){
 
 
 });
+
 /*map*/
 
-/* navigation */
-$(function(){
 
+/* tabs */
+$(function(){
+/*    var $block = $('.js-full-reg');
+
+    if ($block.length === 0) {
+        return false;
+    }*/
+
+    $('.b-tab-nav__content').hide();
+
+    $(".b-tab-nav_nav").tabs(".b-tab-nav__content", {
+        // history: true,
+        current: 'b-tab-nav__menu-box_active',
+        tebs :'div.b-tab-nav__menu-box' ,
+        effect: "slide",
+        //slideUpSpeed: 300,
+       // slideDownSpeed: 0,
+        onBeforeClick: function (event, index) {
+            // console.log('before');
+            //   console.log(event);
+            //  console.log(index);
+            // console.log(this.getCurrentTab());
+            // убрать папика
+           // $(this.getCurrentTab()).parents('.b-tab-nav__menu-box').removeClass('b-tab-nav__menu-box_active');
+        },
+        onClick: function (event, index) {
+           // $('.b-tab-nav__menu-box').removeClass('b-tab-nav__menu-box_active');
+
+          //  $(this.getCurrentTab()).parents('.b-tab-nav__menu-box').addClass('b-tab-nav__menu-box_active');
+        }
+    });
 });
-/* navigation */
+/* tabs */
+
+
 
 
 /* carousel */
@@ -82,3 +114,69 @@ $(function(){
     });
 })(jQuery);
 /* carousel */
+
+
+
+/* navigation*/
+$(function() {
+
+    // Do our DOM lookups beforehand
+    var nav_container = $("c");
+    var nav = $("nav");
+
+    var top_spacing = 15;
+    var waypoint_offset = 50;
+
+    nav_container.waypoint({
+        handler: function(event, direction) {
+
+            if (direction == 'down') {
+
+                nav_container.css({ 'height':nav.outerHeight() });
+                nav.stop().addClass("sticky").css("top",-nav.outerHeight()).animate({"top":top_spacing});
+
+            } else {
+
+                nav_container.css({ 'height':'auto' });
+                nav.stop().removeClass("sticky").css("top",nav.outerHeight()+waypoint_offset).animate({"top":""});
+
+            }
+
+        },
+        offset: function() {
+            return -nav.outerHeight()-waypoint_offset;
+        }
+    });
+
+    var sections = $("section");
+    var navigation_links = $("nav a");
+
+    sections.waypoint({
+        handler: function(event, direction) {
+
+            var active_section;
+            active_section = $(this);
+            if (direction === "up") active_section = active_section.prev();
+
+            var active_link = $('nav a[href="#' + active_section.attr("id") + '"]');
+            navigation_links.removeClass("selected");
+            active_link.addClass("selected");
+
+        },
+        offset: '25%'
+    })
+
+
+    navigation_links.click( function(event) {
+
+        $.scrollTo(
+            $(this).attr("href"),
+            {
+                duration: 200,
+                offset: { 'left':0, 'top':-0.15*$(window).height() }
+            }
+        );
+    });
+
+
+});
