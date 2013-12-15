@@ -523,6 +523,7 @@ body,
 html {
   height: 100%;
   background: #ffffff;
+  min-width: 1000px;
 }
 html {
   *overflow-x: hidden;
@@ -599,6 +600,39 @@ fieldset {
  */
 textarea {
   resize: vertical;
+}
+/*
+This is the visible area of you carousel.
+Set a width here to define how much items are visible.
+The width can be either fixed in px or flexible in %.
+Position must be relative!
+*/
+.jcarousel {
+  position: relative;
+  overflow: hidden;
+}
+/*
+This is the container of the carousel items.
+You must ensure that the position is relative or absolute and
+that the width is big enough to contain all items.
+*/
+.jcarousel ul {
+  width: 20000em;
+  position: relative;
+  /* Optional, required in this case since it's a <ul> element */
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/*
+These are the item elements. jCarousel works best, if the items
+have a fixed width and height (but it's not required).
+*/
+.jcarousel li {
+  /* Required only for block elements like <li>'s */
+
+  float: left;
 }
 /*---| b-text |----------------------------------------------------------------*/
 .b-text__p {
@@ -692,7 +726,6 @@ textarea {
 }
 .b-box-6 {
   background: url("../blocks//i-img/bg6.png") no-repeat bottom center;
-  height: 800px;
 }
 .b-box-7 {
   background: #aa1e2c;
@@ -1082,6 +1115,39 @@ textarea {
   background: url("../blocks//i-img/map.png") no-repeat;
   position: relative;
 }
+.b-map__content {
+  position: absolute;
+  width: 720px;
+  left: 0;
+  top: -56px;
+  font-family: 'FuturisXC';
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.b-map__content_t1 {
+  font-size: 38px;
+  line-height: 46px;
+  margin-bottom: 10px;
+}
+.b-map__content_t2 {
+  font-size: 186px;
+  float: left;
+  line-height: 1;
+  margin-left: -24px;
+  letter-spacing: -14px;
+  width: 223px;
+}
+.b-map__content_t3 {
+  overflow: hidden;
+  padding-left: 5px;
+  font-size: 50px;
+  line-height: 1;
+  display: block;
+  padding-top: 17px;
+}
+.b-map__c-t {
+  color: #c82031;
+}
 .b-map__elem {
   position: absolute;
   cursor: pointer;
@@ -1197,4 +1263,93 @@ textarea {
 /*----------------*/
 .b-map__elem_big:hover .b-map__point-in {
   top: 6px;
+}
+.b-vendors {
+  *zoom: 1;
+}
+.b-vendors:before,
+.b-vendors:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.b-vendors:after {
+  clear: both;
+}
+.b-vendors__item {
+  width: 220px;
+  height: 177px;
+  text-align: center;
+  float: left;
+  background: #ffffff;
+  margin-right: 20px;
+}
+.b-vendors__item:last-child {
+  margin-right: 0;
+}
+.b-clients {
+  position: relative;
+}
+.b-clients__item {
+  margin-right: 20px;
+  background: #f1f1f1;
+  display: block;
+  overflow: hidden;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  -ms-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+.b-clients__item:hover {
+  opacity: 0.7;
+}
+.b-clients__item img {
+  max-width: 100%;
+}
+.b-clients__next {
+  position: absolute;
+  width: 23px;
+  height: 38px;
+  background: red;
+  top: 43px;
+  right: -42px;
+  text-indent: -999999px;
+  overflow: hidden;
+  background: url("../blocks//i-img/arrow.png") no-repeat 0 -110px;
+}
+.b-clients__next:hover {
+  background: url("../blocks//i-img/arrow.png") no-repeat 0 0;
+}
+.b-clients__prev {
+  position: absolute;
+  width: 23px;
+  height: 38px;
+  background: red;
+  top: 43px;
+  left: -42px;
+  text-indent: -999999px;
+  overflow: hidden;
+  background: url("../blocks//i-img/arrow.png") no-repeat 0 -53px;
+}
+.b-clients__prev:hover {
+  background: url("../blocks//i-img/arrow.png") no-repeat 0 -161px;
+}
+.b-clients__carousel {
+  margin-bottom: 20px;
+}
+.b-clients__pagi {
+  text-align: center;
+}
+.b-clients__pagi a {
+  width: 10px;
+  height: 10px;
+  background: #1a2c5e;
+  display: inline-block;
+  text-indent: -9999999px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.b-clients__pagi a.active {
+  background: red;
 }
