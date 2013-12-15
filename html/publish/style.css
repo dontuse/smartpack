@@ -11,9 +11,9 @@
   clear: both;
 }
 @font-face {
-  font-family: "ubuntuRegular";
-  src: url("../blocks/i-fonts/Ubuntu-R-webfont.eot");
-  src: url("../blocks/i-fonts/Ubuntu-R-webfont.eot?#iefix") format("embedded-opentype"), url("../blocks/i-fonts/Ubuntu-R-webfont.woff") format("woff"), url("../blocks/i-fonts/Ubuntu-R-webfont.ttf") format("truetype"), url("../blocks/i-fonts/Ubuntu-R-webfont.svg#ubuntuRegular") format("svg");
+  font-family: 'FuturisXC';
+  src: url('../blocks/fonts/futurisxc-webfont.eot');
+  src: url('../blocks/fonts/futurisxc-webfont.eot?#iefix') format('embedded-opentype'), url('../blocks/fonts/futurisxc-webfont.woff') format('woff'), url('../blocks/fonts/futurisxc-webfont.ttf') format('truetype'), url('../blocks/fonts/futurisxc-webfont.svg#futurisxcregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -1075,4 +1075,125 @@ textarea {
 .b-video__a:visited {
   color: #ad2c38;
 }
-/*===| .b-call-us |======================end==========================================*/
+/*===| .b-call-us |======================end==========================================*/.b-map {
+  height: 547px;
+  width: 941px;
+  background: url("../blocks//i-img/map.png") no-repeat;
+  position: relative;
+}
+.b-map__elem {
+  position: absolute;
+  cursor: pointer;
+}
+.b-map__point {
+  -webkit-border-radius: 7px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 7px;
+  -moz-background-clip: padding;
+  border-radius: 7px;
+  background-clip: padding-box;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  vertical-align: top;
+}
+.b-map__point-in {
+  width: 6px;
+  height: 6px;
+  -webkit-border-radius: 3px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 3px;
+  -moz-background-clip: padding;
+  border-radius: 3px;
+  background-clip: padding-box;
+  background: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 5px;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+.b-map__name {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: top;
+}
+.b-map__curenter {
+  background: url("../blocks//i-img/map-selected.png");
+  width: 38px;
+  height: 41px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -19px;
+  position: absolute;
+  display: none;
+}
+.b-map__descript {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 70px;
+  background: #ffffff;
+  padding: 25px;
+  width: 250px;
+  display: none;
+}
+.b-map__descript:after {
+  content: '';
+  background: url("../blocks//i-img/map-tail.png") no-repeat;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 54px;
+  height: 37px;
+}
+/*------------------------*/
+.b-map__elem_big .b-map__point {
+  width: 26px;
+  height: 26px;
+  -webkit-border-radius: 18px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 18px;
+  -moz-background-clip: padding;
+  border-radius: 18px;
+  background-clip: padding-box;
+}
+.b-map__elem_big .b-map__point-in {
+  top: 10px;
+}
+.b-map__elem_big .b-map__name {
+  line-height: 26px;
+}
+/*-----------------------*/
+.b-map__elem_cur .b-map__descript {
+  display: block;
+}
+.b-map__elem_cur .b-map__curenter {
+  display: block;
+}
+.b-map__elem:hover .b-map__point-in {
+  width: 14px;
+  height: 14px;
+  -webkit-border-radius: 7px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 7px;
+  -moz-background-clip: padding;
+  border-radius: 7px;
+  background-clip: padding-box;
+  background: #ffffff;
+  top: 1px;
+}
+/*----------------*/
+.b-map__elem_big:hover .b-map__point-in {
+  top: 6px;
+}
