@@ -13,7 +13,7 @@
 @font-face {
   font-family: 'FuturisXC';
   src: url('../blocks/fonts/futurisxc-webfont.eot');
-  src: url('../blocks/fonts/futurisxc-webfont.eot?#iefix') format('embedded-opentype'), url('../blocks/fonts/futurisxc-webfont.woff') format('woff'), url('../blocks/fonts/futurisxc-webfont.ttf') format('truetype'), url('../blocks/fonts/futurisxc-webfont.svg#futurisxcregular') format('svg');
+  src: url('../blocks/fonts/futurisxc-webfont.eot?#iefix') format('embedded-opentype'), url('../blocks/fonts/futurisxc-webfont.woff') format('woff'), url('../blocks/fonts/futurisxc-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -532,6 +532,7 @@ body {
   line-height: 1.4666666666666666;
   font-family: Arial, Helvetica, FreeSans, "Liberation Sans", "Nimbus Sans L", sans-serif;
   color: #000000;
+  -webkit-font-smoothing: antialiased ;
 }
 a,
 a:visited {
@@ -851,7 +852,7 @@ textarea {
 .b-nav_lnk {
   text-transform: uppercase;
   margin-right: 20px;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
 }
 /*===| .b-nav |======================end==========================================*/
 /*---| .b-nav_move |----------------------start----------------------------------------*/
@@ -877,7 +878,7 @@ textarea {
   color: #ffffff;
   font-size: 38px;
   line-height: 46px;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
   font-weight: normal;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -902,7 +903,7 @@ textarea {
   color: #ffffff;
   margin-bottom: 41px;
   text-transform: uppercase;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
 }
 .b-title__im {
   color: #c82031;
@@ -939,7 +940,7 @@ textarea {
   line-height: 1;
   margin-bottom: 5px;
   display: block;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
   color: #ffffff;
   text-transform: uppercase;
 }
@@ -969,13 +970,13 @@ textarea {
   line-height: 73px;
   width: 322px;
   color: #ffffff;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
 }
 /*===| .b-contact-form |======================end==========================================*//*---| .b-contacts |----------------------start----------------------------------------*/
 .b-contacts__phones {
   font-size: 15px;
   line-height: 22px;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
   color: #1a2c5e;
 }
 .b-contacts__addr {
@@ -1025,7 +1026,7 @@ textarea {
   text-decoration: none;
   font-size: 13px;
   line-height: 1;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
 }
 /*===| .b-video |======================end==========================================*//*---| .b-tab-nav |----------------------start----------------------------------------*/
 .b-tab-nav__a,
@@ -1038,7 +1039,7 @@ textarea {
 .b-tab-nav__menu-box {
   padding: 20px;
   color: #000000;
-  font-family: FuturisXC;
+  font-family: 'FuturisXC';
 }
 .b-tab-nav__menu-box_active {
   background: #ffffff;
