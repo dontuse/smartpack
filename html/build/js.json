@@ -3,8 +3,10 @@
 
     "../js/lib/jcarousel/jquery.jcarousel.js",
     "../js/lib/jquerytools/tabs/tabs.js",
+
+    "../js/lib/jquery.scrollTo-1.4.3.1.js",
     "../js/lib/waypoints.min.js",
-    "../js/lib/jquery.scrollTo-1.4.2-min.js",
+
     "../js/all.js"
 
 ]

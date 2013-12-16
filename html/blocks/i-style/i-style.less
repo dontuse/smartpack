@@ -146,11 +146,16 @@ have a fixed width and height (but it's not required).
 
 .sticky {
   position: fixed;
-  position: fixed;
   top: 15px;
   background: #ffffff;
-  animation:thedrop 1s 1;
-  -moz-animation:thedrop 1s 1;
-  -webkit-animation:thedrop 1s 1
+  width: 100%;
+  left: 0;
+  line-height: 70px;
+  border-bottom: 1px solid #0b1738;
 
+}
+
+.selected,
+.selected:visited {
+  color: red !important;
 }

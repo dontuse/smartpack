@@ -20,7 +20,7 @@
     <script src="js/lib/modernizr-2.6.2.min.js"></script>
 </head>
 
-<body data-spy="scroll">
+<body>
 
 <div class="b-page">
 <div class="b-page__wrap">
@@ -43,11 +43,13 @@
         </div>
         <div class="b-box nav-container">
             <nav class="b-nav">
-                <a class="b-nav_lnk" href="#technology">Технологии</a>
-                <a class="b-nav_lnk" href="#geography">география</a>
-                <a class="b-nav_lnk" href="#manufacturers">Производители</a>
-                <a class="b-nav_lnk" href="#partnerships">Партнеры</a>
-                <a class="b-nav_lnk" href="#contacts">контакты</a>
+                <div class="b-wrapper">
+                    <a class="b-nav_lnk" href="#technology">Технологии</a>
+                    <a class="b-nav_lnk" href="#geography">география</a>
+                    <a class="b-nav_lnk" href="#manufacturers">Производители</a>
+                    <a class="b-nav_lnk" href="#partnerships">Партнеры</a>
+                    <a class="b-nav_lnk" href="#contacts">контакты</a>
+                </div>
             </nav>
         </div>
     </div>
@@ -83,7 +85,7 @@
         </div>
     </div>
 </div>
-<div class="b-box-2 clearFix" id="technology">
+<div class="b-box-2 clearFix js-w-box" id="technology">
 
     <div class="b-wrapper">
         <div class="b-tab-nav">
@@ -412,7 +414,7 @@
     <div class="b-box-4">
         <div class="b-box-6">
             <div style="height: 1120px" class="b-wrapper clearFix">
-                <div id="geography" style="margin-top: 415px" class="b-map js-map ">
+                <div id="geography" style="margin-top: 415px" class="b-map js-map js-w-box">
                     <section class="b-map__content">
                         <p class="b-map__content_t1">
                             <span class="b-map__c-t">
@@ -475,7 +477,7 @@
         </div>
     </div>
 </div>
-<div class="b-box-7 clearFix" id="manufacturers">
+<div class="b-box-7 clearFix js-w-box" id="manufacturers">
     <div style="height: 400px; margin-top: 120px" class="b-wrapper">
         <h4 class="b-title">
             Производители
@@ -489,7 +491,7 @@
         </div>
     </div>
 </div>
-<div class="clearFix" id="partnerships">
+<div class="clearFix js-w-box" id="partnerships">
     <div style="margin-top: 40px; margin-bottom: -134px;" class="b-wrapper">
         <h4 class="b-title b-title_type_2">
             <span class="b-title__im">наши </span> клиенты
@@ -596,7 +598,7 @@
 
     </div>
 </div>
-<div class="clearFix" id="contacts"
+<div class="clearFix js-w-box" id="contacts"
      style="background: url(blocks/i-img/concats-bg.jpg) no-repeat center top;
               height: 884px">
     <div style="padding-top: 358px" class="b-wrapper">
