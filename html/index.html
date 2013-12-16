@@ -571,32 +571,48 @@
      style="background: url(blocks/i-img/concats-bg.jpg) no-repeat center top;
               height: 884px">
     <div style="padding-top: 358px" class="b-wrapper">
-        <h3 class="b-title"><i class="b-title__im">Свяжитесь</i> с нами</h3>
+        <section class="js-cont-form">
+           <form method="post">
+               <h3 class="b-title"><i class="b-title__im">Свяжитесь</i> с нами</h3>
 
 
-        <div>
-            <div class="b-contact-form">
-                <div class="b-contact-form__box">
-                    <label class="b-contact-form__lab">Ваше имя</label>
-                    <input class="b-contact-form__inp" placeholder="Представьтесь">
+               <div>
+                   <div class="b-contact-form">
+                       <div class="b-contact-form__box">
+                           <label class="b-contact-form__lab">Ваше имя</label>
+                           <input class="b-contact-form__inp" placeholder="Представьтесь">
+                       </div>
+                       <div class="b-contact-form__box">
+                           <label class="b-contact-form__lab">Ваш телефон</label>
+                           <input class="b-contact-form__inp" placeholder="Представьтесь">
+                       </div>
+                       <div style="margin-right: 0" class="b-contact-form__box">
+                           <label class="b-contact-form__lab">Ваш e-mail</label>
+                           <input class="b-contact-form__inp" placeholder="Представьтесь">
+                       </div>
+                       <div style="margin-bottom: 30px">
+                           <label class="b-contact-form__lab">Ваш комментарий</label>
+                           <textarea placeholder="Введите текст" class="b-contact-form__textarea"></textarea>
+                       </div>
+                       <div style="text-align: center">
+                           <button class="b-contact-form__btn">отправить</button>
+                       </div>
+                   </div>
+               </div>
+           </form>
+        </section>
+        <section style="display: none;" class="js-cont-resilt b-cont-result">
+                <h3 class="b-title"><i class="b-title__im">Свяжитесь</i> с нами</h3>
+
+
+                <div class="b">
+                    <p style="color: #ffffff; font-size: 20px; margin-bottom: 20px;">
+                        Мы получили ваше сообщение и свяжемся с Вами в ближайшее время
+                    </p>
+                    <button class="b-contact-form__btn">Назад</button>
                 </div>
-                <div class="b-contact-form__box">
-                    <label class="b-contact-form__lab">Ваш телефон</label>
-                    <input class="b-contact-form__inp" placeholder="Представьтесь">
-                </div>
-                <div style="margin-right: 0" class="b-contact-form__box">
-                    <label class="b-contact-form__lab">Ваш e-mail</label>
-                    <input class="b-contact-form__inp" placeholder="Представьтесь">
-                </div>
-                <div style="margin-bottom: 30px">
-                    <label class="b-contact-form__lab">Ваш комментарий</label>
-                    <textarea placeholder="Введите текст" class="b-contact-form__textarea"></textarea>
-                </div>
-                <div style="text-align: center">
-                    <button class="b-contact-form__btn">отправить</button>
-                </div>
-            </div>
-        </div>
+
+        </section>
     </div>
 </div>
 <footer class="b-footer">
@@ -613,7 +629,7 @@
                 <a class="b-nav_lnk" href="#contacts">контакты</a>
             </nav>
 
-            <div class="b-contacts" style=";">
+            <div class="b-contacts">
                 <div class="b-contacts__phones" style="float: left; width: 169px;">
                     (343) 379 02 25 <br>
                     (922) 292 61 25

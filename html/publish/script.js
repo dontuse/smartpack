@@ -3227,5 +3227,10 @@ $(function(){
 });
 
 $(function(){
-    
+
+    $('.b-contact-form__btn').click(function(e){
+        e.preventDefault();
+        $('.js-cont-form').slideUp();
+        $('.js-cont-resilt').slideDown();
+    });
 });

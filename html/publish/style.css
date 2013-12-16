@@ -1671,4 +1671,10 @@ have a fixed width and height (but it's not required).
 .b-jet__logo:hover {
   background-position: 0 0;
 }
-/*===| .b-jet |======================end==========================================*/
+/*===| .b-jet |======================end==========================================*//*---| .b-cont-result |----------------------start----------------------------------------*/
+.b-cont-result__txt {
+  font-size: 20px;
+  font-family: 'FuturisXC';
+  color: #ffffff;
+}
+/*===| .b-cont-result |======================end==========================================*/
