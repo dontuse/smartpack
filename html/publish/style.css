@@ -666,7 +666,184 @@ have a fixed width and height (but it's not required).
 .b-text__img {
   max-width: 100%;
 }
-/*===| b-text |=================================================================*//*--------------------------*/
+/*===| b-text |=================================================================*//*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+#colorbox,
+#cboxOverlay,
+#cboxWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+#cboxWrapper {
+  max-width: none;
+}
+#cboxOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+#cboxMiddleLeft,
+#cboxBottomLeft {
+  clear: left;
+}
+#cboxContent {
+  position: relative;
+}
+#cboxLoadedContent {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#cboxTitle {
+  margin: 0;
+}
+#cboxLoadingOverlay,
+#cboxLoadingGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#cboxPrevious,
+#cboxNext,
+#cboxClose,
+#cboxSlideshow {
+  cursor: pointer;
+}
+.cboxPhoto {
+  float: left;
+  margin: auto;
+  border: 0;
+  display: block;
+  max-width: none;
+  -ms-interpolation-mode: bicubic;
+}
+.cboxIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+#colorbox,
+#cboxContent,
+#cboxLoadedContent {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+/*
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay {
+  background: #000000;
+}
+#colorbox {
+  outline: 0;
+}
+#cboxContent {
+  margin-top: 32px;
+  overflow: visible;
+  background: #000;
+}
+.cboxIframe {
+  background: #fff;
+}
+#cboxError {
+  padding: 50px;
+  border: 1px solid #ccc;
+}
+#cboxLoadedContent {
+  background: #000;
+  padding: 1px;
+}
+#cboxLoadingGraphic {
+  background: url("../blocks//colorbox/images/loading.gif") no-repeat center center;
+}
+#cboxLoadingOverlay {
+  background: #000;
+}
+#cboxTitle {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  color: #000;
+}
+#cboxCurrent {
+  position: absolute;
+  top: -22px;
+  right: 205px;
+  text-indent: -9999px;
+}
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+#cboxPrevious,
+#cboxNext,
+#cboxSlideshow,
+#cboxClose {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  text-indent: -9999px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -20px;
+  background: url("../blocks//colorbox/images/controls.png") no-repeat 0 0;
+}
+/* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+#cboxPrevious:active,
+#cboxNext:active,
+#cboxSlideshow:active,
+#cboxClose:active {
+  outline: 0;
+}
+#cboxPrevious {
+  background-position: 0px 0px;
+  right: 44px;
+}
+#cboxPrevious:hover {
+  background-position: 0px -25px;
+}
+#cboxNext {
+  background-position: -25px 0px;
+  right: 22px;
+}
+#cboxNext:hover {
+  background-position: -25px -25px;
+}
+#cboxClose {
+  background-position: -50px 0px;
+  right: 0;
+}
+#cboxClose:hover {
+  background-position: -50px -25px;
+}
+.cboxSlideshow_on #cboxPrevious,
+.cboxSlideshow_off #cboxPrevious {
+  right: 66px;
+}
+.cboxSlideshow_on #cboxSlideshow {
+  background-position: -75px -25px;
+  right: 44px;
+}
+.cboxSlideshow_on #cboxSlideshow:hover {
+  background-position: -100px -25px;
+}
+.cboxSlideshow_off #cboxSlideshow {
+  background-position: -100px 0px;
+  right: 44px;
+}
+.cboxSlideshow_off #cboxSlideshow:hover {
+  background-position: -75px -25px;
+}
+/*--------------------------*/
 /*---| .b-grid |----------------------start----------------------------------------*/
 .b-grid {
   *zoom: 1;
@@ -745,6 +922,16 @@ have a fixed width and height (but it's not required).
 .b-wrapper {
   width: 940px;
   margin: 0 auto;
+  *zoom: 1;
+}
+.b-wrapper:before,
+.b-wrapper:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.b-wrapper:after {
+  clear: both;
 }
 /*===| .b-wrapper |======================end==========================================*//*---| .b-footer |----------------------start----------------------------------------*/
 .b-footer {
@@ -761,6 +948,7 @@ have a fixed width and height (but it's not required).
 .b-header {
   min-height: 100px;
   height: 147px;
+  overflow: hidden;
 }
 /*===| .b-header |======================end==========================================*//*---| .b-content |----------------------start----------------------------------------*/
 .b-content {
@@ -914,9 +1102,9 @@ have a fixed width and height (but it's not required).
 }
 /*===| .b-nav_move |======================end==========================================*//*---| .b-slog |----------------------start----------------------------------------*/
 .b-slog {
-  width: 452px;
+  width: 552px;
   margin-left: 309px;
-  top: 360px;
+  top: 396px;
   position: relative;
 }
 .b-slog__wrapper {
@@ -945,7 +1133,7 @@ have a fixed width and height (but it's not required).
   height: 361px;
   background: #000422;
   position: absolute;
-  top: -109px;
+  top: -106px;
   left: -67px;
   background: url("../blocks//i-img/b-slog.png") no-repeat;
 }
@@ -967,7 +1155,14 @@ have a fixed width and height (but it's not required).
 .b-title_type_2 {
   color: #000000;
 }
-/*===| .b-title_type_2 |======================end==========================================*//*---| .b-contact-form |----------------------start----------------------------------------*/
+/*===| .b-title_type_2 |======================end==========================================*/
+/*---| .b-title_type_3 |----------------------start----------------------------------------*/
+.b-title_type_3 {
+  color: #000000;
+  line-height: 42px;
+  margin-bottom: 20px;
+}
+/*===| .b-title_type_3 |======================end==========================================*//*---| .b-contact-form |----------------------start----------------------------------------*/
 .b-contact-form__inp {
   margin: 0;
   padding: 0;
@@ -1075,6 +1270,9 @@ have a fixed width and height (but it's not required).
   overflow: hidden;
   padding-left: 19px;
   line-height: 59px;
+  font-size: 13px;
+  font-family: 'FuturisXC';
+  text-transform: uppercase;
 }
 .b-video__a,
 .b-video__a:visited {
@@ -1086,6 +1284,15 @@ have a fixed width and height (but it's not required).
   font-family: 'FuturisXC';
 }
 /*===| .b-video |======================end==========================================*//*---| .b-tab-nav |----------------------start----------------------------------------*/
+.b-tab-nav {
+  margin-top: 50px;
+}
+.b-tab-nav__nav-box {
+  width: 240px;
+  margin-right: 89px;
+  float: left;
+  margin-left: -21px;
+}
 .b-tab-nav__a,
 .b-tab-nav__a:visited {
   font-size: 15px;
@@ -1120,7 +1327,10 @@ have a fixed width and height (but it's not required).
   overflow: hidden;
 }
 .b-tab-nav__txt-content {
-  margin-bottom: 20px;
+  margin-bottom: 29px;
+  line-height: 1.3;
+  font-size: 15px;
+  color: #303030;
 }
 /*===| .b-tab-nav |======================end==========================================*//*---| .b-call-us |----------------------start----------------------------------------*/
 .b-call-us {
@@ -1143,9 +1353,17 @@ have a fixed width and height (but it's not required).
   float: left;
   margin-right: 19px;
 }
-.b-video__a,
-.b-video__a:visited {
+.b-call-us__txt {
+  line-height: 30px;
+}
+.b-call-us__a,
+.b-call-us__a:visited {
   color: #ad2c38;
+  font-size: 13px;
+  font-family: 'FuturisXC';
+  text-decoration: none;
+  border-bottom: 1px dashed;
+  text-transform: uppercase;
 }
 /*===| .b-call-us |======================end==========================================*/.b-map {
   height: 547px;

@@ -30,7 +30,7 @@ $(function () {
 
     $('.b-tab-nav__content').hide();
 
-    $(".b-tab-nav_nav").tabs(".b-tab-nav__content", {
+    $(".b-tab-nav__nav-box").tabs(".b-tab-nav__content", {
         // history: true,
         current: 'b-tab-nav__menu-box_active',
         tebs: 'div.b-tab-nav__menu-box',
@@ -149,7 +149,7 @@ $(function () {
     });
 
     var sections = $(".js-w-box");
-    var navigation_links = $(".b-nav_lnk");
+    var navigation_links = $(".b-nav_lnk").add('.b-call-us a');
 
     sections.waypoint({
         handler: function (event, direction) {
@@ -184,4 +184,9 @@ $(function () {
     });
 
 
+});
+
+
+$(function(){
+    $(".js-video").colorbox({iframe:true, innerWidth:800, innerHeight:590});
 });

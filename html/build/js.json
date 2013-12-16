@@ -6,6 +6,7 @@
 
     "../js/lib/jquery.scrollTo-1.4.3.1.js",
     "../js/lib/waypoints.min.js",
+    "../js/lib/jquery.colorbox.js",
 
     "../js/all.js"
 
