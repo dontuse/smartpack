@@ -11,20 +11,28 @@
   overflow: hidden;
   width: 79px;
   height: 58px;
+  position: relative;
+  background: #091435;
 }
 
 .b-video__img img {
   max-width: 100%;
+  opacity: 0.5;
 }
 
 .b-video__img:after {
-  background: url("@{blockPath}/i-img/video-play.png") no-repeat center center red;
+  content: '';
+  background: url("@{blockPath}/i-img/video-play.png") no-repeat center center ;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  right: 0;
+  left: 0;
   position: absolute;
+}
+
+.b-video__img:hover img {
+  opacity: 0.9;
 }
 
 
