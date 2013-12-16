@@ -894,10 +894,19 @@ have a fixed width and height (but it's not required).
   *display: inline;
 }
 /*===| .b-carousel |======================end==========================================*//*---| .b-nav |----------------------start----------------------------------------*/
-.b-nav_lnk {
+.b-nav {
+  line-height: 70px;
+}
+.b-nav_lnk,
+.b-nav_lnk:visited {
   text-transform: uppercase;
-  margin-right: 20px;
+  margin-right: 53px;
   font-family: 'FuturisXC';
+  color: #1a2c5e;
+  text-decoration: none;
+  border-bottom: 2px solid;
+  display: inline-block;
+  line-height: 1;
 }
 /*===| .b-nav |======================end==========================================*/
 /*---| .b-nav_move |----------------------start----------------------------------------*/
@@ -1023,11 +1032,14 @@ have a fixed width and height (but it's not required).
   line-height: 22px;
   font-family: 'FuturisXC';
   color: #1a2c5e;
+  margin-top: 11px;
 }
 .b-contacts__addr {
   font-size: 13px;
   line-height: 19px;
   width: 273px;
+  padding-top: 3px;
+  padding-top: 16px;
 }
 /*===| .b-contacts |======================end==========================================*//*---| .b-video |----------------------start----------------------------------------*/
 .b-video {
