@@ -728,7 +728,6 @@ have a fixed width and height (but it's not required).
 }
 .b-box-3 {
   background: url("../blocks//i-img/bg3.png") no-repeat top center;
-  height: 641px;
 }
 .b-box-4 {
   background: url("../blocks//i-img/bg4.png") no-repeat top center;
@@ -740,7 +739,7 @@ have a fixed width and height (but it's not required).
   background: url("../blocks//i-img/bg6.png") no-repeat bottom center;
 }
 .b-box-7 {
-  background: #aa1e2c;
+  background: url("../blocks//i-img/bg8.png") no-repeat bottom center #aa1e2c;
 }
 /*---| .b-wrapper |----------------------start----------------------------------------*/
 .b-wrapper {
@@ -1318,13 +1317,22 @@ have a fixed width and height (but it's not required).
 .b-vendors__item {
   width: 220px;
   height: 177px;
+  line-height: 177px;
   text-align: center;
   float: left;
   background: #ffffff;
   margin-right: 20px;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 .b-vendors__item:last-child {
   margin-right: 0;
+}
+.b-vendors__item:hover {
+  opacity: 0.8;
 }
 .b-clients {
   position: relative;
@@ -1392,3 +1400,23 @@ have a fixed width and height (but it's not required).
 .b-clients__pagi a.active {
   background: red;
 }
+/*---| .b-jet |----------------------start----------------------------------------*/
+.b-jet__logo,
+.b-jet__logo:visited {
+  display: block;
+  width: 66px;
+  height: 31px;
+  background: url("../blocks//i-img/jet-logo.png") no-repeat 0 -49px;
+  overflow: hidden;
+  text-indent: -999999px;
+}
+.b-jet__txt,
+.b-jet__txt:visited {
+  font-size: 13px;
+  color: #afafaf;
+  line-height: 19px;
+}
+.b-jet__logo:hover {
+  background-position: 0 0;
+}
+/*===| .b-jet |======================end==========================================*/
