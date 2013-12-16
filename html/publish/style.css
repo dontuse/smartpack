@@ -645,7 +645,7 @@ have a fixed width and height (but it's not required).
 }
 .selected,
 .selected:visited {
-  color: red !important;
+  color: #C82031 !important;
 }
 /*---| b-text |----------------------------------------------------------------*/
 .b-text__p {
@@ -902,6 +902,7 @@ have a fixed width and height (but it's not required).
 }
 .b-box-2 {
   background: url("../blocks//i-img/bg2.png") repeat-y top center;
+  margin-bottom: -156px;
 }
 .b-box-3 {
   background: url("../blocks//i-img/bg3.png") no-repeat top center;
@@ -1094,6 +1095,14 @@ have a fixed width and height (but it's not required).
   border-bottom: 2px solid;
   display: inline-block;
   line-height: 1;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+.b-nav_lnk:hover {
+  color: #C82031;
 }
 /*===| .b-nav |======================end==========================================*/
 /*---| .b-nav_move |----------------------start----------------------------------------*/

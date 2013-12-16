@@ -190,3 +190,7 @@ $(function () {
 $(function(){
     $(".js-video").colorbox({iframe:true, innerWidth:800, innerHeight:590});
 });
+
+$(function(){
+    
+});
