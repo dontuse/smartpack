@@ -1366,6 +1366,9 @@ have a fixed width and height (but it's not required).
   left: 0;
   right: 0;
 }
+.b-tab-nav__txt-content p {
+  margin-bottom: 10px;
+}
 /*===| .b-tab-nav |======================end==========================================*//*---| .b-call-us |----------------------start----------------------------------------*/
 .b-call-us {
   *zoom: 1;
