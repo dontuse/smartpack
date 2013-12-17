@@ -3206,11 +3206,11 @@ $(function () {
         console.log($(this).attr("href"));
         $.scrollTo(
             $(this).attr("href"),
-            400,
+            800,
             {
 
 
-                //offset: { 'left': 0, 'top': -0.15 * $(window).height() },
+                offset: { 'left': 0, 'top': -0.15 * $(window).height() },
                 callback: function(){
                     alert('Scrolling has now completed.');
                 }
